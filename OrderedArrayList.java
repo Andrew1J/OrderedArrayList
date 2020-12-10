@@ -8,9 +8,14 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
         super(InitialCapacity);
     }
 
-    
     public boolean add(T element){
-
+        for(int i=0;i<this.size();i++){
+            if(element.compareTo(this.get(i))<0){
+                super.add(index-1,element);
+                return true;
+            }
+        }
+        return super.add(value);
     }
-
+    
 }
