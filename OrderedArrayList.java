@@ -5,17 +5,20 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
     }
 
     public OrderedArrayList(int initialCapacity) {
-        super(InitialCapacity);
+        super(initialCapacity);
     }
 
     public boolean add(T element){
+        if(element==null){
+            super.add(element);
+        }
         for(int i=0;i<this.size();i++){
             if(element.compareTo(this.get(i))<0){
-                super.add(index-1,element);
+                super.add(i,element);
                 return true;
             }
         }
-        return super.add(value);
+        return super.add(element);
     }
 
     public void add(int index, T element){
@@ -23,8 +26,9 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
     }
 
     public T set (int index, T element){
-        T removed = super.remove(index);
+        T old = get(index);
+        remove(index);
         add(element);
-        return removed;
+        return old;
     }
 }
